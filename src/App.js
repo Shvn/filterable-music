@@ -36,21 +36,25 @@ class FilterableMusic extends Component {
 
   render() {
     return (
-      <div>
-        <SearchBar
-          filterText={this.state.filterText}
-          musicTypeFilter={this.state.musicTypeFilter}
-          musicianFilter={this.state.musicianFilter}
-          onFilterTextInput={this.handleFilterTextInput}
-          onFilterMusicType={this.handleFilterMusicType}
-          onFilterMusician={this.handleFilterMusician}
-        />
-        <MusicTable
-          musicList={this.props.musicList}
-          filterText={this.state.filterText}
-          musicTypeFilter={this.state.musicTypeFilter}
-          musicianFilter={this.state.musicianFilter}
-        />
+      <div className="row">
+        <div className="col-md-4">
+          <SearchBar
+            filterText={this.state.filterText}
+            musicTypeFilter={this.state.musicTypeFilter}
+            musicianFilter={this.state.musicianFilter}
+            onFilterTextInput={this.handleFilterTextInput}
+            onFilterMusicType={this.handleFilterMusicType}
+            onFilterMusician={this.handleFilterMusician}
+          />
+        </div>
+        <div className="col-md-8">
+          <MusicTable
+            musicList={this.props.musicList}
+            filterText={this.state.filterText}
+            musicTypeFilter={this.state.musicTypeFilter}
+            musicianFilter={this.state.musicianFilter}
+          />
+        </div>
       </div>
     );
   }
@@ -70,8 +74,9 @@ class SearchBar extends Component {
     return (
       <form>
         <input
+          className="form-control"
           type="text"
-          placeholder="Search music"
+          placeholder="Search Music"
           value={this.props.filterText}
           onChange={this.handleFilterTextInputChange}
         />
@@ -95,30 +100,32 @@ var MUSICIANS = [
 
 class FilterOptions extends Component {
   render() {
-    console.log('Music Type Filter : ' + this.props.musicTypeFilter);
-    console.log('Musician Filter : ' + this.props.musicianFilter);
     return (
       <div>
-        <p>
-          <label>
-            Music Type
+        <div className="row">
+          <div className="col-md-10 col-md-offset-1">
+            <label className="label label-info">
+              Music Type
+            </label>
             <MusicTypeFilter
               types={TYPES}
               musicTypeFilter={this.props.musicTypeFilter}
               onFilterMusicType={this.props.onFilterMusicType}
             />
-          </label>
-        </p>
-        <p>
-          <label>
-            Musician
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-10 col-md-offset-1">
+            <label className="label label-info">
+              Musician
+            </label>
             <MusicianFilter
               musicians={MUSICIANS}
               musicianFilter={this.props.musicianFilter}
               onFilterMusician={this.props.onFilterMusician}
             />
-          </label>
-        </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -155,7 +162,7 @@ class MusicTypeFilterInput extends Component {
 
   render() {
     return (
-      <span>
+      <div className="form-control">
         <input
           type="checkbox"
           value={this.props.type}
@@ -163,7 +170,7 @@ class MusicTypeFilterInput extends Component {
           onChange={this.handleFilterMusicTypeChange}
         />
         {' ' + this.props.type}
-      </span>
+      </div>
     );
   }
 }
@@ -199,7 +206,7 @@ class MusicianInput extends Component {
 
   render() {
     return (
-      <span>
+      <div className="form-control">
         <input
           type="checkbox"
           value={this.props.musician}
@@ -207,7 +214,7 @@ class MusicianInput extends Component {
           onChange={this.handleFilterMusicianChange}
         />
         {' ' + this.props.musician}
-      </span>
+      </div>
     );
   }
 }
@@ -223,17 +230,19 @@ class MusicTable extends Component {
       }
     );
     return (
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>Duration</th>
-          <th>Musician</th>
-          <th>Music Type</th>
-        </thead>
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Musician</th>
+            <th>Music Type</th>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
